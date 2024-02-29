@@ -24,7 +24,7 @@ export default function HomePage() {
         <div>
             <h1>Cosmic Strip</h1>
             <aside><NavBar /></aside>
-            <div><strong>Hello {currentUser.email}!</strong></div>
+            <div><strong>Hello {currentUser.username}!</strong></div>
             {/* <label>
                 <input type="text" value="Search" name="search"
                     onChange={(e) => e.filter(a => a.target.value)} />

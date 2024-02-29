@@ -1,7 +1,7 @@
 import { useState } from "react";
 import NavBar from "../components/NavBar";
 import { usePostContext } from "../context/PostContext";
-import NewPostForm from "../components/NewPostForm";
+import NewPostForm from "../forms/NewPostForm";
 
 export default function CreatePost() {
     const {currentPosts, handleUpdatePosts} = usePostContext();

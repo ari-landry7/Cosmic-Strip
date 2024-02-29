@@ -10,6 +10,7 @@ export default function GuestPage() {
                     Welcome to Cosmic Strip, the website where you can find all your favorite webcomics in one place!
                     Log in to comment and post!
                 </article>
+                <Link to="/signup"><button>SIGN UP</button></Link>
                 <Link to="/login"><button>LOG IN</button></Link>
             </section>
             <section>

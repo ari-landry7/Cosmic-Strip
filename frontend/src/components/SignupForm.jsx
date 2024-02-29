@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import LoginForm from "./LoginForm";
 import { useUserContext } from "../context/UserContext";
-import HomePage from "../pages/HomePage";
+import { Link } from "react-router-dom";
 
-function LoginForm() {
-    const navigate = useNavigate()
-    const [userEmail, setUserEmail] = useState('')
-    const [userPassword, setUserPassword] = useState('')
-    const [submitResult, setSubmitResult] = useState('')
+function SignupForm () {
+    const [username, setUsername] = useState('');
+    const [userEmail, setUserEmail] = useState('');
+    const [userPassword, setUserPassword] = useState('');
+    const [submitResult, setSubmitResult] = useState('');
 
-    const {currentUser, handleUpdateUser} = useUserContext()
+    const {currentUser, handleUpdateUser} = useUserContext();
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -17,23 +17,30 @@ function LoginForm() {
             setSubmitResult('Password must be at least 5 characters')
         } else if (userPassword === userEmail) {
             setSubmitResult('Password must not match email address')
+        } else if (!userPassword) {
+            setSubmitResult('Must enter a password')
         } else {
-            // setSubmitResult('Successful login.')
-            handleUpdateUser({email: userEmail})
+            handleUpdateUser({email: userEmail, username: username})
         }
     }
 
     if (currentUser.email) return (
         <div>
-            <HomePage />
+            <LoginForm />
         </div>
     )
 
     return (
         <div>
             <h1>Cosmic Strip</h1>
-            <p>No account? <Link to="/signup">Sign up here!</Link></p>
+            <p>Already have an account? <Link to="/login">Log in</Link> instead!</p>
             <form onSubmit={handleSubmit}>
+                <div>
+                    <label>Username:
+                        <input type="text" value={username} name="username"
+                            onChange={(e) => setUsername(e.target.value)} />
+                    </label>
+                </div>
                 <div>
                     <label>Email:
                         <input type="email" value={userEmail} name="userEmail"
@@ -45,12 +52,12 @@ function LoginForm() {
                         <input type="password" value={userPassword} name="userPassword"
                             onChange={(e) => setUserPassword(e.target.value)} />
                     </label>
-                </div> 
-                <button className="margin" onClick={()=>navigate(-1)}>Back</button><button className="margin">Log in</button>
+                </div>
+                <button className="margin" onClick={()=>navigate(-1)}>Back</button><button className="margin">Sign up</button>
                 <p>{submitResult}</p>
             </form>
         </div>
     )
 }
 
-export default LoginForm;
+export default SignupForm;

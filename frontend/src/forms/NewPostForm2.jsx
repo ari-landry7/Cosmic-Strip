@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { usePostContext } from "../context/PostContext";
 
 function NewPostForm() {
   const [title, setTitle] = useState("");
@@ -11,6 +12,7 @@ function NewPostForm() {
 
   const [response, setResponseMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const {currentPosts, handleUpdatePosts} = usePostContext()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,8 +33,17 @@ function NewPostForm() {
         body: JSON.stringify(postData),
       });
 
+      const postList = await fetch("http://localhost:8000/api/posts")
+        .then((response) => response.json())
+        // .then((json) => {
+        //     console.log(json.data)
+        // });
+      
       const data = await response.json();
       if (response.ok) {
+        console.log(data.data)
+        console.log(postList.data)
+        handleUpdatePosts(postList.data)
         setResponseMessage("Success");
         navigate("/home");
       } else {

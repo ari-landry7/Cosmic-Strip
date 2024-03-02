@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { usePostContext } from "../context/PostContext"
 import SinglePost from "./SinglePost"
 
@@ -18,9 +19,22 @@ function Posts() {
             caption: "This is where the user posts their caption"
         }
     ]
+    const [errorMessage, setErrorMessage] = useState("");
 
-    const {currentPosts, handleUpdatePosts} = usePostContext(comics)
+    const {currentPosts, handleUpdatePosts} = usePostContext()
 
+    const posts = async() => {
+        try {
+            const response = await fetch("http://localhost:8000/api/posts")
+                .then((response) => response.json())
+            handleUpdatePosts(response.data)
+        } catch (error) {
+            setErrorMessage("Something seems to be wrong. Try again");
+            console.error("Oops", error);
+        }
+    }
+    const reload = setInterval(posts, 10_000)
+    reload
     const postList = currentPosts.map(post => (
         <SinglePost
             key={post.id}

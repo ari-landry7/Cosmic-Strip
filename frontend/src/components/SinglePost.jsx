@@ -1,9 +1,13 @@
 function SinglePost(post) {
+    const deletePost = () => {
+        post.onDeletePost(post._id)
+    }
+
     return (
         <div>
             <section className="border margin">
                 <figure>
-                    <div>{post.title}</div>
+                    <div className="flex margin" style={{justifyContent: "space-between"}}><div>{post.title}</div><div><button onClick={() => deletePost(post)}>Delete Post</button></div></div>
                     <img className="margin" alt={post.alt} src={post.image} />
                     <figcaption className="align-left margin">{post.caption}</figcaption>
                 </figure>

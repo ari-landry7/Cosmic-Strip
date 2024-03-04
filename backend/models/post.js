@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
     title: { type: String, trim: true, required: true },
-    imageSource: { type: String, trim: true, required: true },
-    imageAlt: { type: String },
+    image: { type: String, trim: true, required: true },
+    alt: { type: String },
     caption: { type: String }
 });
 

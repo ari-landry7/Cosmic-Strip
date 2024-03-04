@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { usePostContext } from "../context/PostContext";
 
 function NewPostForm() {
   const [title, setTitle] = useState("");
@@ -9,11 +8,7 @@ function NewPostForm() {
   const [caption, setCaption] = useState("");
 
   const navigate = useNavigate();
-
-  const [response, setResponseMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const {currentPosts, handleUpdatePosts} = usePostContext()
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -43,15 +38,11 @@ function NewPostForm() {
       if (response.ok) {
         console.log(data.data)
         console.log(postList.data)
-        handleUpdatePosts(postList.data)
-        setResponseMessage("Success");
         navigate("/home");
       } else {
-        setErrorMessage(data.error);
         console.error("Oops: ", data.error);
       }
     } catch (error) {
-      setErrorMessage("Something seems to be wrong. Try again");
       console.error("Oops", error);
     }
   };

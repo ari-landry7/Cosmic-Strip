@@ -1,7 +1,7 @@
 import { useState } from "react";
 import NavBar from "../components/NavBar";
 import { usePostContext } from "../context/PostContext";
-import NewPostForm2 from "../forms/NewPostForm2";
+import NewPostForm from "../forms/NewPostForm";
 
 export default function CreatePost() {
     const {currentPosts, handleUpdatePosts} = usePostContext();
@@ -16,7 +16,7 @@ export default function CreatePost() {
         <div>
             <h1>Cosmic Strip</h1>
             <aside><NavBar /></aside>
-            <NewPostForm2 />
+            <NewPostForm />
         </div>
     )
 }

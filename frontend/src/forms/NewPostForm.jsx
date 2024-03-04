@@ -48,7 +48,7 @@ function NewPostForm() {
   };
 
   return (
-    <div>
+    <div style={{width: "80vw"}}>
       <form onSubmit={handleSubmit}>
         <div>
           <label>

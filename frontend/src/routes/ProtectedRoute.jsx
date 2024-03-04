@@ -4,7 +4,7 @@ import { useUserContext } from "../context/UserContext";
 export default function ProtectedRoute ({ redirectPath = '/login', children }) {
     const {currentUser} = useUserContext();
 
-    if (!currentUser.email) {
+    if (!currentUser.username) {
         return <Navigate to={redirectPath} replace />;
     }
     

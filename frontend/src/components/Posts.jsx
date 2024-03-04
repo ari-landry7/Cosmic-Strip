@@ -3,6 +3,7 @@ import { usePostContext } from "../context/PostContext";
 import SinglePost from "./SinglePost";
 
 function Posts() {
+  const [responseMessage, setResponseMessage] = useState("")
   const [errorMessage, setErrorMessage] = useState("");
   const [currentPosts, setCurrentPosts] = useState([]);
 
@@ -13,10 +14,24 @@ function Posts() {
       .then(response => response.json())
       .then(json => {
         console.log("deletePost: ", json.data);
+        setResponseMessage('Success')
+      })
+  };
+
+  const handleUpdatePost = (id) => {
+    fetch("http://localhost:8000/api/posts/" + id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postData),
+    })
+      .then(response => response.json())
+      .then(json => {
+        console.log("deletePost: ", json.data);
         console.log(json)
       })
-
-  };
+  }
 
   useEffect(() => {
     try {
@@ -37,7 +52,7 @@ function Posts() {
       setErrorMessage("Something seems to be wrong. Try again");
       console.error("Oops", error);
     }
-  }, []);
+  }, [responseMessage]);
 
   const postList = currentPosts.map(post => (
     <SinglePost

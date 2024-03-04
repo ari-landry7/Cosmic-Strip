@@ -7,6 +7,11 @@ router.get('/', (req, res) => {
     Controllers.userController.getUsers(res);
 })
 
+// http://localhost:8000/api/users/:username GET route to return user by username param
+router.get('/:username', (req, res) => {
+    Controllers.userController.getUser(req, res)
+})
+
 // http://localhost:8000/api/users/create Sends data to the POST method to create a new user
 router.post('/create', (req, res) => {
     Controllers.userController.createUser(req.body, res)

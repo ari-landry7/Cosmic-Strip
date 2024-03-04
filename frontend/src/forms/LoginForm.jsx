@@ -1,26 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
 import HomePage from "../pages/HomePage";
 
 function LoginForm() {
     const navigate = useNavigate()
-    const [userEmail, setUserEmail] = useState('')
-    const [userPassword, setUserPassword] = useState('')
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [submitResult, setSubmitResult] = useState('')
 
     const {currentUser, handleUpdateUser} = useUserContext()
 
+    useEffect(() => {
+        fetch("http://localhost:8000/api/users/")
+    })
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (userPassword.length < 5) {
-            setSubmitResult('Password must be at least 5 characters')
-        } else if (userPassword === userEmail) {
-            setSubmitResult('Password must not match email address')
-        } else {
+        // if (password.length < 5) {
+        //     setSubmitResult('Password must be at least 5 characters')
+        // } else if (password === email) {
+        //     setSubmitResult('Password must not match email address')
+        // } else {
             // setSubmitResult('Successful login.')
-            handleUpdateUser({email: userEmail})
-        }
+            handleUpdateUser({email: email, username: username})
+        // }
     }
 
     if (currentUser.email) return (
@@ -37,12 +42,12 @@ function LoginForm() {
                 <div>
                     <label>Email:
                         <input type="email" value={userEmail} name="userEmail"
-                            onChange={(e) => setUserEmail(e.target.value)} />
+                            onChange={(e) => setEmail(e.target.value)} />
                     </label>
                 </div>
                 <div>
                     <label>Password:
-                        <input type="password" value={userPassword} name="userPassword"
+                        <input type="password" value={password} name="userPassword"
                             onChange={(e) => setUserPassword(e.target.value)} />
                     </label>
                 </div> 

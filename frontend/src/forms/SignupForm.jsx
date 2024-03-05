@@ -37,9 +37,15 @@ function SignupForm() {
         const user = data.data
         if (response.ok) {
             setResponseMessage('Success')
-            console.log(user)
-            handleUpdateUser({username: user.username, email: user.email})
-            navigate('/home')
+            // console.log(user)
+            // if (password.length < 5) {
+            //   setSubmitResult('Password must be at least 5 characters')
+            // } else if (password == email) {
+            //   setSubmitResult('Password must not match email address')
+            // } else {
+              handleUpdateUser({username: user.username, email: user.email})
+              navigate('/home')
+            // }
         } else {
             setErrorMessage(data.error)
             console.error('Oops: ', data.error)

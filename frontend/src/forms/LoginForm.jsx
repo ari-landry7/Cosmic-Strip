@@ -2,47 +2,35 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
 
-function findUser(username) {
-    const [response, setResponse] = useState("")
-    const [user, setUser] = useState()
-    const {currentUser, handleUpdateUser} = useUserContext({})
-
-    useEffect(() => {
-        console.log("running effect");
-        let ignore = false;
-
-        fetch("http://localhost:8000/api/users/" + username)
-            .then(response => response.json())
-            .then(json => {
-                // console.log(json.data)
-                setUser(json.data[0])
-                // console.log(user)
-            })
-        return () => {
-            ignore = true;
-            console.log("cleanup effect");
-            setResponse("Success")
-            };
-    }, [currentUser])
-
-    return user
-}
-
 function LoginForm() {
     const navigate = useNavigate()
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [dbuser, setDbuser] = useState()
     const [submitResult, setSubmitResult] = useState('')
 
     const {currentUser, handleUpdateUser} = useUserContext({})
 
-    const user = findUser(currentUser.username)
-
-    const handleUpdateUsername = (e) => {
-        // console.log(user)
-        setUsername(e.target.value)
+    const handleUpdateEmail = (e) => {
+        setEmail(e.target.value)
     }
+
+    useEffect(() => {
+        console.log("running effect");
+        let ignore = false;
+
+        fetch("http://localhost:8000/api/users/" + email)
+            .then(response => response.json())
+            .then(json => {
+                if (!ignore) setDbuser(json.data[0])
+            })
+        return () => {
+            ignore = true;
+            console.log("cleanup effect");
+            // setResponse("Success")
+            };
+    }, [email])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -51,28 +39,31 @@ function LoginForm() {
         // } else if (password === email) {
         //     setSubmitResult('Password must not match email address')
         // } else {
-            // setSubmitResult('Successful login.')
-        handleUpdateUser({username: username})
-        if (password === user.password) navigate('/home')
+            // setSubmitResult('Successful login.')  
+        handleUpdateUser({email: currentUser.email}) 
+        if (password === dbuser.password) {
+            handleUpdateUser({username: dbuser.username})
+            navigate('/home')
+        }
         else {
             setSubmitResult('Incorrect password')
         }
         // }
     }
 
-    // console.log(currentUser, user)
+    // console.log(email, dbuser)
     
     return (
         <div>
             <h1>Cosmic Strip</h1>
             <p>No account? <Link to="/signup">Sign up here!</Link></p>
-            <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Username:
-                        <input type="text" value={username} name="username"
-                            onChange={(e) => handleUpdateUsername(e)} />
+                    <label>Email:
+                        <input type="email" value={email} name="email"
+                            onChange={(e) => handleUpdateEmail(e)} />
                     </label>
                 </div>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label>Password:
                         <input type="password" value={password} name="password"

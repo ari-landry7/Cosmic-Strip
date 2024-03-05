@@ -12,7 +12,7 @@ const getUsers = (res) => {
 }
 
 const getUser = (req, res) => {
-    Models.User.find({username: req.params.username})
+    Models.User.find({email: req.params.email})
         .then(data => res.status(200).send({result: 200, data: data}))
         .catch(err => {
             console.log(err)

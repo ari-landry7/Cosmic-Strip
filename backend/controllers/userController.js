@@ -11,8 +11,19 @@ const getUsers = (res) => {
         })
 }
 
-const getUser = (req, res) => {
+const getUserEmail = (req, res) => {
+    // finds the user with the matching email param
     Models.User.find({email: req.params.email})
+        .then(data => res.status(200).send({result: 200, data: data}))
+        .catch(err => {
+            console.log(err)
+            res.status(500).send({result: 500, error: err.message})
+        })
+}
+
+const getUserUsername = (req, res) => {
+    // finds the user with the matching username param
+    Models.User.find({username: req.params.username})
         .then(data => res.status(200).send({result: 200, data: data}))
         .catch(err => {
             console.log(err)
@@ -53,5 +64,5 @@ const deleteUser = (req, res) => {
 }
 
 module.exports = {
-    getUsers, createUser, updateUser, deleteUser, getUser
+    getUsers, createUser, updateUser, deleteUser, getUserEmail, getUserUsername
 }

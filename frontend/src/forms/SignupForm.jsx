@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUserContext } from "../context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -12,9 +12,6 @@ function SignupForm() {
 
   const navigate = useNavigate();
 
-  const [response, setResponseMessage] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -25,6 +22,11 @@ function SignupForm() {
     };
 
     try {
+      if (password.length < 5) {
+        setSubmitResult('Password must be at least 5 characters')
+      } else if (password == email) {
+        setSubmitResult('Password must not match email address')
+      } else {
         const response = await fetch('http://localhost:8000/api/users/create', {
             method: 'POST',
             headers: {
@@ -35,26 +37,20 @@ function SignupForm() {
 
         const data = await response.json()
         const user = data.data
-        if (response.ok) {
-            setResponseMessage('Success')
-            // console.log(user)
-            // if (password.length < 5) {
-            //   setSubmitResult('Password must be at least 5 characters')
-            // } else if (password == email) {
-            //   setSubmitResult('Password must not match email address')
-            // } else {
-              handleUpdateUser({username: user.username, email: user.email})
-              navigate('/home')
-            // }
-        } else {
-            setErrorMessage(data.error)
-            console.error('Oops: ', data.error)
-        };
-    } catch (error) {
-        setErrorMessage('Something seems to be wrong. Try again')
-        console.error('Oops', error)  
-    }
 
+        if (response.ok) {
+          console.log(user)
+
+          handleUpdateUser({username: user.username, email: user.email})
+          navigate('/home')
+        } else {
+          setSubmitResult('A user with this username or email already exists. Please try again with different values')
+        }
+      } 
+    } catch (error) {
+        setSubmitResult('Something seems to be wrong. Try again')
+        console.log('An error occurred: ', error)  
+    }
   };
 
   return (

@@ -41,12 +41,17 @@ function LoginForm() {
         // } else {
             // setSubmitResult('Successful login.')  
         handleUpdateUser({email: currentUser.email}) 
-        if (password === dbuser.password) {
-            handleUpdateUser({username: dbuser.username, email: dbuser.email, password: dbuser.password})
-            navigate('/home')
-        }
-        else {
-            setSubmitResult('Incorrect password')
+        try {
+            if (password === dbuser.password) {
+                handleUpdateUser({username: dbuser.username, email: dbuser.email, password: dbuser.password})
+                navigate('/home')
+            }
+            else {
+                setSubmitResult('Incorrect password')
+            }
+        } catch (error) {
+            console.log('An error occurred: ', error)
+            setSubmitResult('User not found')
         }
         // }
     }

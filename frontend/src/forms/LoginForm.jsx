@@ -42,7 +42,7 @@ function LoginForm() {
             // setSubmitResult('Successful login.')  
         handleUpdateUser({email: currentUser.email}) 
         if (password === dbuser.password) {
-            handleUpdateUser({username: dbuser.username})
+            handleUpdateUser({username: dbuser.username, email: dbuser.email, password: dbuser.password})
             navigate('/home')
         }
         else {

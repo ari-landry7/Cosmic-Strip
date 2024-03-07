@@ -9,7 +9,7 @@ function SinglePost(post) {
 
     return (
         <div>
-            <section className="border margin">
+            <section className="border margin card">
                 <figure>
                     <div className="flex margin" style={{justifyContent: "space-between", alignItems: "center"}}>
                         <h2>{post.title}</h2>

@@ -22,9 +22,12 @@ export default function HomePage() {
 
     return (
         <div style={{width: "80vw"}}>
-            <h1>Cosmic Strip</h1>
-            <aside><NavBar /></aside>
-            <div><strong>Hello {currentUser.username}!</strong></div>
+            <div className="header">
+                <a href="#top" style={{color: "white"}}><h1>Cosmic Strip</h1></a>
+                <NavBar />
+            </div>
+            
+            <div id="#top"><strong>Hello {currentUser.username}!</strong></div>
             {/* <label>
                 <input type="text" value="Search" name="search"
                     onChange={(e) => e.filter(a => a.target.value)} />

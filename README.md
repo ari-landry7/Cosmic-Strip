@@ -9,7 +9,7 @@ React and react-router-dom
 `npm install react-router-dom`
 
 ### Backend
-Express, Mongoose, and dotenv
+Express, Mongoose, and dotenv. MongoDB is required to run this app
 ```
 npm init
 npm install express

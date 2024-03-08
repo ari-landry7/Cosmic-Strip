@@ -11,6 +11,15 @@ const getUsers = (res) => {
         })
 }
 
+const getUser = (req, res) => {
+    Models.User.find({email: req.params.email})
+        .then(data => res.status(200).send({result: 200, data: data}))
+        .catch(err => {
+            console.log(err)
+            res.status(500).send({result: 500, error: err.message})
+        })
+}
+
 const createUser = (data, res) => {
     // creates a new user using JSON data POSTed in req.body
     console.log('createUser: ', data)
@@ -44,5 +53,5 @@ const deleteUser = (req, res) => {
 }
 
 module.exports = {
-    getUsers, createUser, updateUser, deleteUser
+    getUsers, createUser, updateUser, deleteUser, getUser
 }

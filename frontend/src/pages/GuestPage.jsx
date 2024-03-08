@@ -3,15 +3,15 @@ import Posts from "../components/Posts";
 
 export default function GuestPage() {
     return (
-        <div>
+        <div style={{width: "80vw"}}>
             <h1>Cosmic Strip</h1>
             <section>
                 <article className="margin">
                     Welcome to Cosmic Strip, the website where you can find all your favorite webcomics in one place!
                     Log in to comment and post!
                 </article>
-                <Link to="/signup"><button>SIGN UP</button></Link>
-                <Link to="/login"><button>LOG IN</button></Link>
+                <Link to="/signup"><button className="margin">SIGN UP</button></Link>
+                <Link to="/login"><button className="margin">LOG IN</button></Link>
             </section>
             <section>
                 <h3 className="featured">Featured Comics</h3>

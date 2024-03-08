@@ -21,7 +21,7 @@ export default function HomePage() {
     }
 
     return (
-        <div>
+        <div style={{width: "80vw"}}>
             <h1>Cosmic Strip</h1>
             <aside><NavBar /></aside>
             <div><strong>Hello {currentUser.username}!</strong></div>

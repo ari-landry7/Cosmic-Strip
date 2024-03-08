@@ -1,49 +1,73 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
-import HomePage from "../pages/HomePage";
 
 function LoginForm() {
     const navigate = useNavigate()
-    const [userEmail, setUserEmail] = useState('')
-    const [userPassword, setUserPassword] = useState('')
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [dbuser, setDbuser] = useState()
     const [submitResult, setSubmitResult] = useState('')
 
-    const {currentUser, handleUpdateUser} = useUserContext()
+    const {currentUser, handleUpdateUser} = useUserContext({})
+
+    const handleUpdateEmail = (e) => {
+        setEmail(e.target.value)
+    }
+
+    useEffect(() => {
+        console.log("running effect");
+        let ignore = false;
+
+        fetch("http://localhost:8000/api/users/" + email)
+            .then(response => response.json())
+            .then(json => {
+                if (!ignore) setDbuser(json.data[0])
+            })
+        return () => {
+            ignore = true;
+            console.log("cleanup effect");
+            // setResponse("Success")
+            };
+    }, [email])
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (userPassword.length < 5) {
-            setSubmitResult('Password must be at least 5 characters')
-        } else if (userPassword === userEmail) {
-            setSubmitResult('Password must not match email address')
-        } else {
-            // setSubmitResult('Successful login.')
-            handleUpdateUser({email: userEmail})
+        // if (password.length < 5) {
+        //     setSubmitResult('Password must be at least 5 characters')
+        // } else if (password === email) {
+        //     setSubmitResult('Password must not match email address')
+        // } else {
+            // setSubmitResult('Successful login.')  
+        handleUpdateUser({email: currentUser.email}) 
+        if (password === dbuser.password) {
+            handleUpdateUser({username: dbuser.username})
+            navigate('/home')
         }
+        else {
+            setSubmitResult('Incorrect password')
+        }
+        // }
     }
 
-    if (currentUser.email) return (
-        <div>
-            <HomePage />
-        </div>
-    )
-
+    // console.log(email, dbuser)
+    
     return (
         <div>
             <h1>Cosmic Strip</h1>
             <p>No account? <Link to="/signup">Sign up here!</Link></p>
-            <form onSubmit={handleSubmit}>
                 <div>
                     <label>Email:
-                        <input type="email" value={userEmail} name="userEmail"
-                            onChange={(e) => setUserEmail(e.target.value)} />
+                        <input type="email" value={email} name="email"
+                            onChange={(e) => handleUpdateEmail(e)} />
                     </label>
                 </div>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label>Password:
-                        <input type="password" value={userPassword} name="userPassword"
-                            onChange={(e) => setUserPassword(e.target.value)} />
+                        <input type="password" value={password} name="password"
+                            onChange={(e) => setPassword(e.target.value)} />
                     </label>
                 </div> 
                 <button className="margin" onClick={()=>navigate(-1)}>Back</button><button className="margin">Log in</button>

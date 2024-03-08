@@ -1,6 +1,5 @@
 import { useState } from "react";
-// import LoginForm from "./LoginForm";
-// import { useUserContext } from "../context/UserContext";
+import { useUserContext } from "../context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 
 function SignupForm() {
@@ -8,6 +7,8 @@ function SignupForm() {
   const [email, setUserEmail] = useState("");
   const [password, setUserPassword] = useState("");
   const [submitResult, setSubmitResult] = useState("");
+
+  const {currentUser, handleUpdateUser} = useUserContext({})
 
   const navigate = useNavigate();
 
@@ -33,9 +34,18 @@ function SignupForm() {
         });
 
         const data = await response.json()
+        const user = data.data
         if (response.ok) {
             setResponseMessage('Success')
-            navigate('/home')
+            // console.log(user)
+            // if (password.length < 5) {
+            //   setSubmitResult('Password must be at least 5 characters')
+            // } else if (password == email) {
+            //   setSubmitResult('Password must not match email address')
+            // } else {
+              handleUpdateUser({username: user.username, email: user.email})
+              navigate('/home')
+            // }
         } else {
             setErrorMessage(data.error)
             console.error('Oops: ', data.error)

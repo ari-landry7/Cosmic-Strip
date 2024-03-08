@@ -11,9 +11,10 @@ export default function NavBar() {
     return (
         <nav className="nav">
                 <NavLink to="/home">Home</NavLink>
-                <NavLink to="">Popular</NavLink>
-                <NavLink to="">Undiscovered</NavLink>
+                <NavLink to="/home">Popular</NavLink>
+                <NavLink to="/home">Undiscovered</NavLink>
                 <NavLink to="/new">New Post</NavLink>
+                <NavLink to="/profile">Profile</NavLink>
                 <NavLink onClick={logout} to="/">Log out</NavLink>
         </nav>
     )

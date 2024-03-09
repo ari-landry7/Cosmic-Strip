@@ -24,10 +24,10 @@ function SinglePost(post) {
     }
 
     return (
-        <div>
-            <section className="border margin card">
+        <>
+            <section className="border card">
                 <figure>
-                    <div className="flex margin" style={{justifyContent: "space-between", alignItems: "center"}}>
+                    <div className="flex" style={{justifyContent: "space-between", alignItems: "center"}}>
                         <section className="flex padding align-left">
                             {/* <img alt="avatar" src="https://placehold.co/70x70" style={{borderRadius: "50%"}} /> */}
                             <h2>{post.title}</h2>
@@ -38,7 +38,7 @@ function SinglePost(post) {
                         </div>
                     </div>
                     <hr />
-                    <img className="margin" alt={post.alt} src={post.image} style={{maxWidth: "90%"}} />
+                    <img className="margin comic-image" alt={post.alt} src={post.image} />
                     <hr />
                     <section className="margin align-left">
                         <p><strong>By {post.postUsername}</strong></p>
@@ -55,7 +55,7 @@ function SinglePost(post) {
                     </div>
                 </figure> */}
             </section>
-        </div>
+        </>
     )
 }
 

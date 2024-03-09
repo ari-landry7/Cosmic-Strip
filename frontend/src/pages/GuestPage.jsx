@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Posts from "../components/Posts";
 import NavBar from "../components/NavBar";
 import { Button } from "@mui/material";
+import AdSpace from "../components/AdSpace";
 
 export default function GuestPage() {
     return (
@@ -23,7 +24,10 @@ export default function GuestPage() {
 
             <section>
                 <h3 className="featured">Featured Comics</h3>
-                <Posts />
+                <div className="flex">
+                    <Posts />
+                    <AdSpace />
+                </div>
             </section>
         </div>
     )

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Posts from "../components/Posts";
 import NavBar from "../components/NavBar";
+import { Button } from "@mui/material";
 
 export default function GuestPage() {
     return (
@@ -14,8 +15,10 @@ export default function GuestPage() {
                     <p>Welcome to Cosmic Strip, the website where you can find all your favorite webcomics in one place!
                     Log in to comment and post!</p>
                 </article>
-                <Link to="/signup"><button className="margin">SIGN UP</button></Link>
-                <Link to="/login"><button className="margin">LOG IN</button></Link>
+                <div className="flex" style={{justifyContent: "space-around"}}>
+                    <Link to="/signup"><Button variant="contained" size="large" className="margin">SIGN UP</Button></Link>
+                    <Link to="/login"><Button variant="contained" size="large" className="margin">LOG IN</Button></Link>
+                </div>
             </section>
 
             <section>

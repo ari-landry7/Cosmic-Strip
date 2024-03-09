@@ -1,12 +1,13 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  font-family: "Kode Mono", "Chakra Petch", "Orbitron", monospace;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   /* background-color: #242424; */
-  background-image: url(C:\Users\emmab\git\Cosmic-Strip\frontend\src\assets\stars.jpg);
+  background-image: url('./assets/stars.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;

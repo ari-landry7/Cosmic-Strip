@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useUserContext } from "../context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
+import { Box, TextField, Button } from '@mui/material'
 
 function SignupForm() {
   const [username, setUsername] = useState("");
-  const [email, setUserEmail] = useState("");
-  const [password, setUserPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [submitResult, setSubmitResult] = useState("");
 
   const {currentUser, handleUpdateUser} = useUserContext({})
@@ -59,46 +60,45 @@ function SignupForm() {
       <p>
         Already have an account? <Link to="/login">Log in</Link> instead!
       </p>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Username:
-            <input
-              type="text"
+      <Box component="form" onSubmit={handleSubmit}>
+        <div className="margin">
+            <TextField
+              required
+              variant="filled"
               value={username}
               name="username"
+              label="Username"
               onChange={(e) => setUsername(e.target.value)}
             />
-          </label>
         </div>
-        <div>
-          <label>
-            Email:
-            <input
+        <div className="margin">
+            <TextField
+              required
+              variant="filled"
               type="email"
               value={email}
-              name="userEmail"
-              onChange={(e) => setUserEmail(e.target.value)}
+              name="email"
+              label="Email"
+              onChange={(e) => setEmail(e.target.value)}
             />
-          </label>
         </div>
-        <div>
-          <label>
-            Password:
-            <input
+        <div className="margin">
+            <TextField
+              required
+              variant="filled"
               type="password"
               value={password}
-              name="userPassword"
-              onChange={(e) => setUserPassword(e.target.value)}
+              name="password"
+              label="Password"
+              onChange={(e) => setPassword(e.target.value)}
             />
-          </label>
         </div>
-        <button className="margin" onClick={() => navigate(-1)}>
+        <Button variant="contained" className="margin" onClick={() => navigate(-1)}>
           Back
-        </button>
-        <button className="margin">Sign up</button>
+        </Button> 
+        <Button variant="contained" className="margin">Sign up</Button>
         <p>{submitResult}</p>
-      </form>
+      </Box>
     </div>
   );
 }

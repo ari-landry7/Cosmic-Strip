@@ -93,10 +93,13 @@ function SignupForm() {
               onChange={(e) => setPassword(e.target.value)}
             />
         </div>
-        <Button variant="contained" className="margin" onClick={() => navigate(-1)}>
-          Back
-        </Button> 
-        <Button variant="contained" className="margin">Sign up</Button>
+        <div style={{display: "flex", justifyContent: "space-around"}}>
+          <Button variant="contained" onClick={() => navigate(-1)}>
+            Back
+          </Button> 
+          <Button variant="contained" onClick={() => navigate('/')}>Guest Page</Button>
+          <Button variant="contained" onClick={handleSubmit}>Sign up</Button>
+        </div>
         <p>{submitResult}</p>
       </Box>
     </div>

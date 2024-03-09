@@ -1,14 +1,40 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useUserContext } from "../context/UserContext";
+import { useEffect } from "react";
 
 function NewPostForm() {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [alt, setAlt] = useState("");
   const [caption, setCaption] = useState("");
+  const [userId, setUserId] = useState("");
+  const [postUsername, setPostUsername] = useState("");
+
+  const { currentUser } = useUserContext();
+  const email = currentUser.email;
 
   const navigate = useNavigate();
-  
+
+  useEffect(() => {
+    console.log("running effect");
+    let ignore = false;
+
+    fetch("http://localhost:8000/api/users/" + email)
+      .then((response) => response.json())
+      .then((json) => {
+        if (!ignore) {
+          // console.log(json.data[0])
+          setUserId(json.data[0]._id);
+          setPostUsername(json.data[0].username);
+        }
+      });
+    return () => {
+      ignore = true;
+      console.log("cleanup effect");
+    };
+  }, [currentUser]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -17,6 +43,8 @@ function NewPostForm() {
       image,
       alt,
       caption,
+      userId,
+      postUsername
     };
 
     try {
@@ -28,16 +56,17 @@ function NewPostForm() {
         body: JSON.stringify(postData),
       });
 
-      const postList = await fetch("http://localhost:8000/api/posts")
-        .then((response) => response.json())
-        // .then((json) => {
-        //     console.log(json.data)
-        // });
-      
+      const postList = await fetch("http://localhost:8000/api/posts").then(
+        (response) => response.json()
+      );
+      // .then((json) => {
+      //     console.log(json.data)
+      // });
+
       const data = await response.json();
       if (response.ok) {
-        console.log(data.data)
-        console.log(postList.data)
+        // console.log(data.data);
+        // console.log(postList.data);
         navigate("/home");
       } else {
         console.error("Oops: ", data.error);
@@ -48,7 +77,7 @@ function NewPostForm() {
   };
 
   return (
-    <div style={{width: "80vw"}}>
+    <div style={{ width: "80vw" }}>
       <form onSubmit={handleSubmit}>
         <div>
           <label>

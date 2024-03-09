@@ -57,6 +57,8 @@ function Posts() {
   const postList = currentPosts.map(post => (
     <SinglePost
       key={post._id}
+      userId={post.userId}
+      postUsername={post.postUsername}
       title={post.title}
       image={post.image}
       alt={post.alt}

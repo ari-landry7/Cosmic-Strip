@@ -10,3 +10,6 @@ React and Material-UI
 ### Backend
 Express, Mongoose, and dotenv. MongoDB is the database used, with Mongoose installed to connect it to the app
 
+## Usage
+
+## Features

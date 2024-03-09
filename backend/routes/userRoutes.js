@@ -7,12 +7,12 @@ router.get('/', (req, res) => {
     Controllers.userController.getUsers(res);
 })
 
-// http://localhost:8000/api/users/:email GET route to return user by email param
+// http://localhost:8000/api/users/<email> GET route to return user by email param
 router.get('/:email', (req, res) => {
     Controllers.userController.getUserEmail(req, res)
 })
 
-// http://localhost:8000/api/users/:username GET route to return user by username param
+// http://localhost:8000/api/users/<username> GET route to return user by username param
 router.get('/:username', (req, res) => {
     Controllers.userController.getUserUsername(req, res)
 })

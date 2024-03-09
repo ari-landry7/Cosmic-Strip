@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useUserContext } from "../context/UserContext"
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
+import { Box, Button, InputLabel, TextField } from "@mui/material";
 
 export default function ProfilePage() {
     const navigate = useNavigate()
@@ -116,48 +117,54 @@ export default function ProfilePage() {
                 <NavBar />
             </div>
             <section>
-                <nav className="flex" style={{justifyContent: "space-around"}}>
-                    <div><button onClick={handleEditProfile}>Edit Profile</button></div>
+                <nav className="flex" style={{justifyContent: "space-around", alignItems: "center"}}>
+                    <div><Button variant="contained" onClick={handleEditProfile}>Edit Profile</Button></div>
                     <div><h2>{currentUser.username}'s Profile</h2></div>
-                    <div><button onClick={handleDeleteUser}>Delete Profile</button></div>
+                    <div><Button variant="contained" onClick={handleDeleteUser}>Delete Profile</Button></div>
                 </nav>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>
-                            <strong>Username:</strong> <span>
-                            {showElement ? <input
+                <Box component="form" onSubmit={handleSubmit}>
+                    <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                        <InputLabel for="username"><strong>Username:</strong></InputLabel>
+                        <span>
+                            {showElement ? <TextField
+                            id="username"
                             type="text"
                             value={username}
                             name="username"
                             onChange={(e) => setUsername(e.target.value)}
-                            /> : currentUser.username }</span>
-                        </label>
+                            /> : currentUser.username }
+                        </span>
+                        
                     </div>
-                    <div>
-                        <label>
-                            <strong>Email:</strong> <span>
-                            {showElement ? <input
+                    <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                        <InputLabel for="email"><strong>Email: </strong></InputLabel> 
+                        <span>
+                            {showElement ? <TextField
+                            id="email"
                             type="email"
                             value={email}
                             name="email"
                             onChange={(e) => setEmail(e.target.value)}
-                            /> : currentUser.email }</span>
-                        </label>
+                            /> : currentUser.email }
+                        </span>
                     </div>
                     <div>
-                        {showElement ? <label>
-                            <strong>Password:</strong> <span>
-                            <input
-                            type="password"
-                            value={password}
-                            name="password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            /></span>
-                        </label> : null}
+                        {showElement ? <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                        <InputLabel for="password"><strong>Password:</strong></InputLabel>
+                            <span>
+                                <TextField
+                                id="password"
+                                type="password"
+                                value={password}
+                                name="password"
+                                onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </span>
+                        </div> : null}
                     </div>
-                    {showElement ? <button className="margin">Confirm changes</button> : null}
+                    {showElement ? <Button onClick={handleSubmit} variant="contained" className="margin">Confirm changes</Button> : null}
                     <div className="margin"><em>{submitResult}</em></div>
-                </form>
+                </Box>
             </section>
         </div>
     )

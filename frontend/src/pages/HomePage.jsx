@@ -3,6 +3,7 @@ import Posts from "../components/Posts";
 import { useState } from "react";
 import { usePostContext } from "../context/PostContext";
 import { useUserContext } from "../context/UserContext";
+import AdSpace from "../components/AdSpace";
 
 export default function HomePage() {
     const {currentUser, handleUpdateUser} = useUserContext();
@@ -36,7 +37,11 @@ export default function HomePage() {
             {/* <label>
                 <input type="text" name="search" onChange={e => handleFilterPosts(e.target.value)} />
             </label> */}
-            <Posts />
+            <div className="flex">
+                <Posts />
+                <AdSpace />
+            </div>
+            
         </div>
     )
 }

@@ -1,3 +1,5 @@
+import { Button } from "@mui/material"
+import EditModal from "../forms/EditModal"
 import { useUserContext } from "../context/UserContext"
 
 function SinglePost(post) {
@@ -19,26 +21,27 @@ function SinglePost(post) {
             alert("Cannot edit posts that you did not create")
             console.log('Failed to edit post: username does not match')
         }
-        
     }
 
     return (
-        <div>
-            <section className="border margin card">
+        <>
+            <section className="border card">
                 <figure>
-                    <div className="flex margin" style={{justifyContent: "space-between", alignItems: "center"}}>
+                    <div className="flex" style={{justifyContent: "space-between", alignItems: "center"}}>
                         <section className="flex padding align-left">
                             {/* <img alt="avatar" src="https://placehold.co/70x70" style={{borderRadius: "50%"}} /> */}
                             <h2>{post.title}</h2>
                         </section>
-                        <div><button onClick={() => updatePost(post)}>Edit</button>
-                            <button onClick={() => deletePost(post)}>Delete</button></div>
+                        <div>
+                            <EditModal postId={post._id} />
+                            <Button variant="outlined" style={{width: "6em"}} onClick={() => deletePost(post)}>Delete</Button>
+                        </div>
                     </div>
                     <hr />
-                    <img className="margin" alt={post.alt} src={post.image} style={{maxWidth: "90%"}} />
+                    <img className="margin comic-image" alt={post.alt} src={post.image} />
                     <hr />
                     <section className="margin align-left">
-                        <p><em>By {post.postUsername}</em></p>
+                        <p><strong>By {post.postUsername}</strong></p>
                         <div>{post.caption}</div>
                     </section>
                 </figure>
@@ -52,7 +55,7 @@ function SinglePost(post) {
                     </div>
                 </figure> */}
             </section>
-        </div>
+        </>
     )
 }
 

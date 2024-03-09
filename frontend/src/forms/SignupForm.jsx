@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { useUserContext } from "../context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
+import { Box, TextField, Button } from "@mui/material";
 
 function SignupForm() {
   const [username, setUsername] = useState("");
-  const [email, setUserEmail] = useState("");
-  const [password, setUserPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [submitResult, setSubmitResult] = useState("");
 
-  const {currentUser, handleUpdateUser} = useUserContext({})
+  const { currentUser, handleUpdateUser } = useUserContext({});
 
   const navigate = useNavigate();
 
@@ -23,33 +24,35 @@ function SignupForm() {
 
     try {
       if (password.length < 5) {
-        setSubmitResult('Password must be at least 5 characters')
+        setSubmitResult("Password must be at least 5 characters");
       } else if (password == email) {
-        setSubmitResult('Password must not match email address')
+        setSubmitResult("Password must not match email address");
       } else {
-        const response = await fetch('http://localhost:8000/api/users/create', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userData)
+        const response = await fetch("http://localhost:8000/api/users/create", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
         });
 
-        const data = await response.json()
-        const user = data.data
+        const data = await response.json();
+        const user = data.data;
 
         if (response.ok) {
-          console.log(user)
+          console.log(user);
 
-          handleUpdateUser({username: user.username, email: user.email})
-          navigate('/home')
+          handleUpdateUser({ username: user.username, email: user.email });
+          navigate("/home");
         } else {
-          setSubmitResult('A user with this username or email already exists. Please try again with different values')
+          setSubmitResult(
+            "A user with this username or email already exists. Please try again with different values"
+          );
         }
-      } 
+      }
     } catch (error) {
-        setSubmitResult('Something seems to be wrong. Try again')
-        console.log('An error occurred: ', error)  
+      setSubmitResult("Something seems to be wrong. Try again");
+      console.log("An error occurred: ", error);
     }
   };
 
@@ -59,46 +62,52 @@ function SignupForm() {
       <p>
         Already have an account? <Link to="/login">Log in</Link> instead!
       </p>
-      <form onSubmit={handleSubmit}>
+      <Box component="form" onSubmit={handleSubmit}>
         <div>
-          <label>
-            Username:
-            <input
-              type="text"
-              value={username}
-              name="username"
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </label>
+          <TextField
+            required
+            variant="filled"
+            value={username}
+            name="username"
+            label="Username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </div>
         <div>
-          <label>
-            Email:
-            <input
-              type="email"
-              value={email}
-              name="userEmail"
-              onChange={(e) => setUserEmail(e.target.value)}
-            />
-          </label>
+          <TextField
+            required
+            variant="filled"
+            type="email"
+            value={email}
+            name="email"
+            label="Email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div>
-          <label>
-            Password:
-            <input
-              type="password"
-              value={password}
-              name="userPassword"
-              onChange={(e) => setUserPassword(e.target.value)}
-            />
-          </label>
+          <TextField
+            required
+            variant="filled"
+            type="password"
+            value={password}
+            name="password"
+            label="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
-        <button className="margin" onClick={() => navigate(-1)}>
-          Back
-        </button>
-        <button className="margin">Sign up</button>
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <Button variant="contained" onClick={() => navigate(-1)}>
+            Back
+          </Button>
+          <Button variant="contained" onClick={() => navigate("/")}>
+            Guest Page
+          </Button>
+          <Button variant="contained" onClick={handleSubmit}>
+            Sign up
+          </Button>
+        </div>
         <p>{submitResult}</p>
-      </form>
+      </Box>
     </div>
   );
 }

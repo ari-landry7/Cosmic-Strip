@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
+import { Box, Button, TextField } from "@mui/material";
 
 function LoginForm() {
     const navigate = useNavigate()
@@ -41,6 +42,7 @@ function LoginForm() {
         // } else {
             // setSubmitResult('Successful login.')  
         handleUpdateUser({email: currentUser.email}) 
+        console.log(dbuser, password)
         try {
             if (password === dbuser.password) {
                 handleUpdateUser({username: dbuser.username, email: dbuser.email, password: dbuser.password})
@@ -62,22 +64,25 @@ function LoginForm() {
         <div>
             <h1>Cosmic Strip</h1>
             <p>No account? <Link to="/signup">Sign up here!</Link></p>
-                <div>
-                    <label>Email:
-                        <input type="email" value={email} name="email"
-                            onChange={(e) => handleUpdateEmail(e)} />
-                    </label>
+                <div className="margin">
+                    <TextField required variant="filled" type="email"
+                        value={email} name="email" label="Email"
+                        onChange={(e) => handleUpdateEmail(e)} />
                 </div>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Password:
-                        <input type="password" value={password} name="password"
-                            onChange={(e) => setPassword(e.target.value)} />
-                    </label>
+            <Box component="form" onSubmit={handleSubmit}>
+                <div className="margin">
+                    <TextField required variant="filled" type="password" 
+                        value={password} name="password" label="Password"
+                        onChange={(e) => setPassword(e.target.value)} />
                 </div> 
-                <button className="margin" onClick={()=>navigate(-1)}>Back</button><button className="margin">Log in</button>
+                <div className="margin" style={{display: "flex", justifyContent: "space-around"}}>
+                    <Button variant="contained" onClick={()=>navigate(-1)}>Back</Button>
+                    <Button variant="contained" onClick={() => navigate('/')}>Guest Page</Button>
+                    <Button variant="contained" onClick={handleSubmit}>Log in</Button>
+                </div>
+                
                 <p>{submitResult}</p>
-            </form>
+            </Box>
         </div>
     )
 }

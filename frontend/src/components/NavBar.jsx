@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
+import { ButtonGroup, Button } from "@mui/material";
 
 export default function NavBar() {
     const {currentUser, handleUpdateUser} = useUserContext()
@@ -9,13 +10,13 @@ export default function NavBar() {
     }
     
     return (
-        <nav className="nav">
-                <NavLink to="/home">Home</NavLink>
-                <NavLink to="/home">Popular</NavLink>
-                <NavLink to="/home">Undiscovered</NavLink>
-                <NavLink to="/new">New Post</NavLink>
-                <NavLink to="/profile">Profile</NavLink>
-                <NavLink onClick={logout} to="/">Log out</NavLink>
-        </nav>
+        <ButtonGroup variant="outlined" className="margin">
+            <NavLink to="/home"><Button style={{width: "19.5vw"}}>Home</Button></NavLink>
+            {/* <NavLink to="/home">Popular</NavLink>
+            <NavLink to="/home">Undiscovered</NavLink> */}
+            <NavLink to="/new"><Button style={{width: "19.5vw"}}>New Post</Button></NavLink>
+            <NavLink to="/profile"><Button style={{width: "19.5vw"}}>Profile</Button></NavLink>
+            <NavLink onClick={logout} to="/"><Button style={{width: "19.5vw"}}>Log out</Button></NavLink>
+        </ButtonGroup>
     )
 }

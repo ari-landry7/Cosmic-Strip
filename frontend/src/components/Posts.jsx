@@ -69,13 +69,13 @@ function Posts() {
 
   return (
     <div>
-      <label>
+      {/* <label>
         <input
           type="text"
           name="search"
           onChange={(e) => handleFilterPosts(e.target.value)}
         />
-      </label>
+      </label> */}
       {postList.reverse()}
     </div>
   );

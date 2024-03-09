@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
 import { useEffect } from "react";
+import { Box, Button, TextField } from "@mui/material";
 
 function NewPostForm() {
   const [title, setTitle] = useState("");
@@ -44,7 +45,7 @@ function NewPostForm() {
       alt,
       caption,
       userId,
-      postUsername
+      postUsername,
     };
 
     try {
@@ -78,49 +79,49 @@ function NewPostForm() {
 
   return (
     <div style={{ width: "80vw" }}>
-      <form onSubmit={handleSubmit}>
+      <Box component="form" size="large" onSubmit={handleSubmit}>
         <div>
-          <label>
-            Title:
-            <input
-              name="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </label>
+          <TextField
+            variant="outlined"
+            label="Title"
+            name="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
         </div>
         <div>
-          <label>
-            Image:
-            <input
-              name="image"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-            />
-          </label>
+          <TextField
+            variant="outlined"
+            label="Image"
+            name="image"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+          />
         </div>
         <div>
-          <label>
-            Alternative Text:
-            <input
-              name="alt"
-              value={alt}
-              onChange={(e) => setAlt(e.target.value)}
-            />
-          </label>
+          <TextField
+            variant="outlined"
+            label="Alternative Text"
+            name="alt"
+            value={alt}
+            onChange={(e) => setAlt(e.target.value)}
+          />
         </div>
         <div>
-          <label>
-            Caption:
-            <input
-              name="caption"
-              value={caption}
-              onChange={(e) => setCaption(e.target.value)}
-            />
-          </label>
+          <TextField
+            variant="outlined"
+            label="Caption"
+            name="caption"
+            value={caption}
+            onChange={(e) => setCaption(e.target.value)}
+          />
         </div>
-        <button>Post</button>
-      </form>
+        <div>
+          <Button variant="contained" onClick={handleSubmit}>
+            Post
+          </Button>
+        </div>
+      </Box>
     </div>
   );
 }

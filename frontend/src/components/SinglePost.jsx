@@ -33,7 +33,7 @@ function SinglePost(post) {
                             <h2>{post.title}</h2>
                         </section>
                         <div>
-                            <EditModal />
+                            <EditModal postId={post._id} />
                             <Button variant="outlined" style={{width: "6em"}} onClick={() => deletePost(post)}>Delete</Button>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { usePostContext } from "../context/PostContext";
 import SinglePost from "./SinglePost";
+import { useUserContext } from "../context/UserContext";
 
 function Posts() {
   const [responseMessage, setResponseMessage] = useState("")
@@ -30,6 +31,7 @@ function Posts() {
       .then(json => {
         console.log("deletePost: ", json.data);
         console.log(json)
+        setResponseMessage('Success')
       })
   }
 

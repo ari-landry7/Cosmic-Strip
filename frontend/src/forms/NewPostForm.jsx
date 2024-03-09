@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
 import { useEffect } from "react";
@@ -11,8 +11,7 @@ function NewPostForm() {
   const [caption, setCaption] = useState("");
   const [userId, setUserId] = useState("");
   const [postUsername, setPostUsername] = useState("");
-
-  const { currentUser } = useUserContext();
+  const {currentUser} = useUserContext();
   const email = currentUser.email;
 
   const navigate = useNavigate();
@@ -45,7 +44,7 @@ function NewPostForm() {
       alt,
       caption,
       userId,
-      postUsername,
+      postUsername
     };
 
     try {
@@ -68,6 +67,7 @@ function NewPostForm() {
       if (response.ok) {
         // console.log(data.data);
         // console.log(postList.data);
+
         navigate("/home");
       } else {
         console.error("Oops: ", data.error);

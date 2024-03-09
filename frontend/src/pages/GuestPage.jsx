@@ -7,9 +7,9 @@ import AdSpace from "../components/AdSpace";
 export default function GuestPage() {
     return (
         <div style={{width: "80vw"}}>
-            <div className="header">
+            <header className="header">
                 <a href="#top" style={{color: "white"}}><h1>Cosmic Strip</h1></a>
-            </div>
+            </header>
 
             <section id="top">
                 <article className="margin">

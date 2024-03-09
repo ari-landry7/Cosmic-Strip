@@ -4,6 +4,7 @@ import { useUserContext } from "../context/UserContext";
 export default function NavBar() {
     const {currentUser, handleUpdateUser} = useUserContext()
 
+    // function to log out user when called. The NavLink below then redirects the user to the guest page
     const logout = () => {
         handleUpdateUser({username: null})
     }

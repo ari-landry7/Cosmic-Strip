@@ -9,6 +9,7 @@ export default function GuestPage() {
         <div style={{width: "80vw"}}>
             <header className="header">
                 <a href="#top" style={{color: "white"}}><h1>Cosmic Strip</h1></a>
+                <Link to='/signup'>Subscribe now</Link> to get rid of ads!
             </header>
 
             <section id="top">

@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useUserContext } from "../context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, TextField, Button } from "@mui/material";
+import { Box, TextField, Button, Checkbox, FormControlLabel } from "@mui/material";
 
 function SignupForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitResult, setSubmitResult] = useState("");
+  const [subscribeStatus, setSubscribeStatus] = useState(false)
 
   const { currentUser, handleUpdateUser } = useUserContext({});
 
@@ -20,6 +21,7 @@ function SignupForm() {
       username,
       email,
       password,
+      subscribeStatus
     };
 
     try {
@@ -41,8 +43,12 @@ function SignupForm() {
 
         if (response.ok) {
           console.log(user);
-
-          handleUpdateUser({ username: user.username, email: user.email });
+          if (subscribeStatus) {
+            handleUpdateUser({ username: user.username, email: user.email, subscribeStatus: true });
+          } else {
+            handleUpdateUser({ username: user.username, email: user.email, subscribeStatus: false })
+          }
+          
           navigate("/home");
         } else {
           setSubmitResult(
@@ -94,6 +100,11 @@ function SignupForm() {
             label="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
+        </div>
+        <div>
+          <FormControlLabel 
+            control={<Checkbox checked={subscribeStatus} onChange={(e) => setSubscribeStatus(e.target.checked)} />} 
+            label="Subscribe for an ad-free experience!" />
         </div>
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <Button variant="contained" onClick={() => navigate(-1)}>

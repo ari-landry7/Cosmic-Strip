@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import SinglePost from "./SinglePost";
-import EditModal from "../forms/EditModal";
 import { usePostContext } from "../context/PostContext";
 
 function Posts() {

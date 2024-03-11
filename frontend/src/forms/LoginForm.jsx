@@ -45,7 +45,7 @@ function LoginForm() {
         console.log(dbuser, password)
         try {
             if (password === dbuser.password) {
-                handleUpdateUser({username: dbuser.username, email: dbuser.email, password: dbuser.password})
+                handleUpdateUser({username: dbuser.username, email: dbuser.email, password: dbuser.password, subscribeStatus: dbuser.subscribeStatus})
                 navigate('/home')
             }
             else {

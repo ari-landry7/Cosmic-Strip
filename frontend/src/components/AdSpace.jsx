@@ -13,6 +13,9 @@ export default function AdSpace() {
                 <img className="ad"
                     src="https://placehold.co/300x500/85c6fb/000012?text=Ad+Space"
                 /> 
+                <img className="ad"
+                    src="https://placehold.co/300x600?text=Ad+Space"
+                /> 
         </div> : null}
     </div>
   );

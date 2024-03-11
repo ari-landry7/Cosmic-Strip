@@ -26,7 +26,7 @@ export default function HomePage() {
         <div style={{width: "80vw"}}>
             <div className="header">
                 <a href="#top" style={{color: "white"}}><h1>Cosmic Strip</h1></a>
-                {showElement ? <div><Link to='/profile'>Subscribe now</Link> to get rid of ads!</div> : null}
+                {!currentUser.subscribeStatus ? <div><Link to='/profile'>Subscribe now</Link> to get rid of ads!</div> : null}
                 <NavBar />
             </div>
             
@@ -41,7 +41,9 @@ export default function HomePage() {
             </label> */}
             <div className="flex">
                 <Posts />
+                {/* {currentUser.subscribeStatus ? null :  */}
                 <AdSpace />
+                {/* } */}
             </div>
             
         </div>

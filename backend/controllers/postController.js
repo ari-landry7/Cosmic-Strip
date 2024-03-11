@@ -13,7 +13,7 @@ const getPosts = (res) => {
 
 const getPost = (req, res) => {
     // finds post with matching ID param
-    Models.Post.find({_id: req.params._id})
+    Models.Post.find({_id: req.params.id})
         .then(data => res.status(200).send({result: 200, data: data}))
         .catch(err => {
             console.log(err)

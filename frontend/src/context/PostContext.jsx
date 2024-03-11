@@ -1,16 +1,20 @@
-import { useContext, createContext, useState } from "react";
+import { useContext, createContext, useState, useEffect } from "react";
 
 const PostContext = createContext();
 
 export const PostProvider = (props) => {
-    const [currentPosts, setPostList] = useState([])
+    const [currentPost, setCurrentPost] = useState({})
+    const [title, setTitle] = useState("")
+    const [image, setImage] = useState("")
+    const [alt, setAlt] = useState("")
+    const [caption, setCaption] = useState("")
 
-    const handleUpdatePosts = (list) => {
-        setPostList(list)
+    const handleUpdatePost = (post) => {
+        setCurrentPost(post)
     }
 
     return (
-        <PostContext.Provider value={{currentPosts, handleUpdatePosts}}>
+        <PostContext.Provider value={{currentPost, handleUpdatePost}}>
             {props.children}
         </PostContext.Provider>
     )

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useUserContext } from "../context/UserContext"
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, InputLabel, TextField } from "@mui/material";
+import { Box, Button, Checkbox, FormControlLabel, Input, InputLabel, TextField } from "@mui/material";
 
 export default function ProfilePage() {
     const navigate = useNavigate()
@@ -15,7 +15,7 @@ export default function ProfilePage() {
     const [dbUser, setDbuser] = useState()
     const [showElement, setShowElement] = useState(false);
     const [submitResult, setSubmitResult] = useState("")
-
+    const [subscribeStatus, setSubscribeStatus] = useState(currentUser.subscribeStatus)
     
     useEffect(() => {
         console.log("running effect");
@@ -42,6 +42,12 @@ export default function ProfilePage() {
         }
     }
 
+    const handleSubscribe = () => {
+        if (subscribeStatus) {
+            setSubscribeStatus(false)
+        } else setSubscribeStatus(true)
+    }
+
     // handleSubmit updates the current user's profile with data received from the form below
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -49,7 +55,8 @@ export default function ProfilePage() {
         const userData = {
             username,
             email,
-            password
+            password,
+            subscribeStatus
         }
 
         try {
@@ -68,7 +75,10 @@ export default function ProfilePage() {
                 const user = data.data
 
                 // console.log(user)
-                handleUpdateUser({username: user.username, email: user.email})
+                if (subscribeStatus) {
+                    handleUpdateUser({username: user.username, email: user.email, subscribeStatus: true})
+                } else handleUpdateUser({username: user.username, email: user.email, subscribeStatus: false})
+                
                 setShowElement(false)
                 setSubmitResult('Profile updated successfully')
             } else {
@@ -161,6 +171,13 @@ export default function ProfilePage() {
                                 />
                             </span>
                         </div> : null}
+                    </div>
+                    <div>{}</div>
+                    <div>
+                        {showElement ? !currentUser.subscribeStatus ? <FormControlLabel 
+                            control={<Checkbox onChange={handleSubscribe} />} 
+                            label="Subscribe for an ad-free experience!" /> : <FormControlLabel control={<Checkbox onChange={handleSubscribe} />} label="Unsubscribe" /> : 
+                            currentUser.subscribeStatus ? <InputLabel>You are subscribed!</InputLabel> : <InputLabel>You are not subscribed</InputLabel>}
                     </div>
                     {showElement ? <Button onClick={handleSubmit} variant="contained" className="margin">Confirm changes</Button> : null}
                     <div className="margin"><em>{submitResult}</em></div>

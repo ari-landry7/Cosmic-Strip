@@ -1,12 +1,27 @@
 # Cosmic-Strip
 Cosmic Strip is a space themed webcomic app that is available for all to use. Users must create an account to post comics or comment, but may view comics without an account.
-Currently, the edit and delete buttons are visible on all posts for all users, but users are not permitted to edit or delete posts by other users. If attempted, an alert will show, and the action will be canceled.
+Artists of all talents may post their comics, so you don't have to be a professional artist to share your work!
+In the future, a search bar will be implemented that will only be available to logged-in users, but users without an account may still view the featured comics.
+
+## Status
+This app is currently under development. Expect new features and updates periodically
 
 ## Features
 * See featured comics without logging in
 * Make an account to comment and post your own comics
 * Edit your account on the profile page
 * Edit your posts on the homepage by clicking the edit button
+
+## API Calls
+The URLs for Cosmic Strip's API calls are located in the routes folder, which is in the backend folder: 'Cosmic-Strip/backend/routes'. These routes can be tested in Postman or Thunder Client (links below in "Dependencies")
+
+**Create (POST):** Used for creating a new resource in the database
+
+**Read (GET):** Used for fetching/finding an existing resource in the database
+
+**Update (PUT):** Used for updating an existing resource in the database
+
+**Delete (DELETE):** Used for deleting an existing resource in the database
 
 ## Dependencies
 Below are the dependencies needed to run this app
@@ -33,8 +48,9 @@ After making sure you have the proper dependencies, follow these steps to get th
    npm install
    ```
 4. In the backend folder, create a .env file
-5. Store your database connection string in the .env file. It may look something like this: DB_URI = mongodb://localhost:5173/yourdatabasename
+5. Store your database connection string in the .env file. It may look something like this: DB_URI = mongodb://localhost:*yourlocalhost*/*yourdatabasename*
 6. Store your port in the .env file. It may look something like this: PORT = 8000
+
    **Be sure to include your .env file in your .gitignore file to keep your database credentials secure**
 7. Start the server:
    * Frontend:
@@ -43,9 +59,20 @@ After making sure you have the proper dependencies, follow these steps to get th
      npm run dev
      ```
    * Backend, in a different terminal:
+  
+   **Make sure your MongoDB server is running in the background!**
+   
      ```
      cd backend
      npm run server
      ```
-8. Open your web browser and navigate to http://localhost:5173
-9. Explore the app!
+9. Open your web browser and navigate to http://localhost:5173
+10. Explore the app!
+
+## Future Plans
+In the future, I plan to enhance the project by adding the following features:
+* Adapt for mobile
+* Add a light mode theme
+* Add icons to the edit and delete buttons for style
+* Add a comment function for users to comment on posts
+* Add a search bar that is only available to logged-in users

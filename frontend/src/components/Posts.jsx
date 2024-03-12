@@ -44,7 +44,7 @@ function Posts() {
       .then(json => {
         console.log("updatePost: ", json.data);
         // console.log(json)
-        setResponseMessage('Success')
+        setResponseMessage('Update success')
       })
   }
 

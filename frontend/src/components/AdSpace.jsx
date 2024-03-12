@@ -5,8 +5,8 @@ export default function AdSpace() {
     const {currentUser} = useUserContext()
   return (
     <div style={{ margin: ".5em .25em 0" }}>
-        {!currentUser.subscribeStatus ? <div>
-            <header className="header" style={{top: "8.5em"}}></header>
+        {!currentUser.subscribeStatus ? <div style={{width: "20em"}}>
+            {/* <header className="header" style={{top: "8.5em"}}></header> */}
                 <img className="ad" 
                     src="https://placehold.co/300x300/5635B2/fff?text=Ad+Space"
                 />

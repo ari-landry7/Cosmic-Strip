@@ -41,9 +41,7 @@ export default function HomePage() {
             </label> */}
             <div className="flex">
                 <Posts />
-                {/* {currentUser.subscribeStatus ? null :  */}
                 <AdSpace />
-                {/* } */}
             </div>
             
         </div>

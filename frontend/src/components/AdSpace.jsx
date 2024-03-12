@@ -8,13 +8,13 @@ export default function AdSpace() {
         {!currentUser.subscribeStatus ? <div style={{width: "20em"}}>
             {/* <header className="header" style={{top: "8.5em"}}></header> */}
                 <img className="ad" 
-                    src="https://placehold.co/300x300/5635B2/fff?text=Ad+Space"
+                    src="https://placehold.co/400x400/5635B2/fff?text=Ad+Space"
                 />
                 <img className="ad"
-                    src="https://placehold.co/300x500/85c6fb/000012?text=Ad+Space"
+                    src="https://placehold.co/400x600/85c6fb/000012?text=Ad+Space"
                 /> 
                 <img className="ad"
-                    src="https://placehold.co/300x600?text=Ad+Space"
+                    src="https://placehold.co/400x800/fff/1f1f1f?text=Ad+Space"
                 /> 
         </div> : null}
     </div>

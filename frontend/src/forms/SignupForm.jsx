@@ -8,11 +8,22 @@ function SignupForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitResult, setSubmitResult] = useState("");
+  const [checked, setChecked] = useState(false)
   const [subscribeStatus, setSubscribeStatus] = useState(false)
 
   const { currentUser, handleUpdateUser } = useUserContext({});
 
   const navigate = useNavigate();
+
+  const handleChecked = () => {
+    if (!checked) {
+      setChecked(true)
+      setSubscribeStatus(true)
+    } else {
+      setChecked(false)
+      setSubscribeStatus(false)
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,11 +54,11 @@ function SignupForm() {
 
         if (response.ok) {
           console.log(user);
-          if (subscribeStatus) {
-            handleUpdateUser({ username: user.username, email: user.email, subscribeStatus: true });
-          } else {
-            handleUpdateUser({ username: user.username, email: user.email, subscribeStatus: false })
-          }
+          // if (subscribeStatus) {
+            handleUpdateUser({ username: user.username, email: user.email, password: password, subscribeStatus: subscribeStatus });
+          // } else {
+            // handleUpdateUser({ username: user.username, email: user.email, subscribeStatus: false })
+          // }
           
           navigate("/home");
         } else {
@@ -103,7 +114,7 @@ function SignupForm() {
         </div>
         <div>
           <FormControlLabel 
-            control={<Checkbox checked={subscribeStatus} onChange={(e) => setSubscribeStatus(e.target.checked)} />} 
+            control={<Checkbox checked={checked} onChange={(e) => handleChecked(e.target.checked)} />} 
             label="Subscribe for an ad-free experience!" />
         </div>
         <div style={{ display: "flex", justifyContent: "space-around" }}>

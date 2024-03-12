@@ -76,8 +76,8 @@ export default function ProfilePage() {
 
                 // console.log(user)
                 if (subscribeStatus) {
-                    handleUpdateUser({username: user.username, email: user.email, subscribeStatus: true})
-                } else handleUpdateUser({username: user.username, email: user.email, subscribeStatus: false})
+                    handleUpdateUser({username: user.username, email: user.email, password: user.password, subscribeStatus: true})
+                } else handleUpdateUser({username: user.username, email: user.email, password: user.password, subscribeStatus: false})
                 
                 setShowElement(false)
                 setSubmitResult('Profile updated successfully')

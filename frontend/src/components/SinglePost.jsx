@@ -27,8 +27,13 @@ function SinglePost(post) {
   const {currentPost, handleUpdatePost} = usePostContext()
 
   const handleOpen = () => {
-    setOpen(true);
-    handleUpdatePost(post)
+    if (currentUser.username === post.postUsername) {
+      setOpen(true);
+      handleUpdatePost(post) 
+    } else {
+      alert("Cannot edit posts that you did not create");
+      console.log("Failed to edit post: username does not match");
+    }
   }
   const handleClose = () => setOpen(false);
 
@@ -60,13 +65,13 @@ function SinglePost(post) {
         newCaption = caption
     } else newCaption = post.caption
     
-    if (currentUser.username === post.postUsername) {
+    // if (currentUser.username === post.postUsername) {
       handleUpdatePost({id: post._id, title: newTitle, image: newImage, alt: alt, caption: caption})
       post.onUpdatePost(post._id);
-    } else {
-      alert("Cannot edit posts that you did not create");
-      console.log("Failed to edit post: username does not match");
-    }
+    // } else {
+    //   alert("Cannot edit posts that you did not create");
+    //   console.log("Failed to edit post: username does not match");
+    // }
   };
 
   return (

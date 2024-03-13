@@ -86,7 +86,7 @@ function SinglePost(post) {
               {/* <img alt="avatar" src="https://placehold.co/70x70" style={{borderRadius: "50%"}} /> */}
               <h2>{post.title}</h2>
             </section>
-            <div>
+            {currentUser.username === post.postUsername ? <div>
               {/* <EditModal /> */}
               {/* <Button variant="outlined" style={{width: "6em"}} onClick={() => updatePost(post)}>Edit</Button> */}
               <div>
@@ -140,8 +140,8 @@ function SinglePost(post) {
               >
                 Delete
               </Button>
-            </div>
-          </div>
+            </div> : null}
+          </div> 
           <hr />
           <img className="margin comic-image" alt={post.alt} src={post.image} />
           <hr />

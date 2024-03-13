@@ -81,6 +81,7 @@ function NewPostForm() {
       <Box component="form" size="large" onSubmit={handleSubmit}>
         <div>
           <TextField
+            required
             variant="outlined"
             label="Title"
             name="title"
@@ -90,8 +91,9 @@ function NewPostForm() {
         </div>
         <div>
           <TextField
+            required
             variant="outlined"
-            label="Image"
+            label="Image URL"
             name="image"
             value={image}
             onChange={(e) => setImage(e.target.value)}

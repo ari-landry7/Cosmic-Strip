@@ -1,4 +1,6 @@
 import { Button, Box, Modal, TextField } from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useUserContext } from "../context/UserContext";
 import { useState } from "react";
 import { usePostContext } from "../context/PostContext";
@@ -95,7 +97,6 @@ function SinglePost(post) {
                   style={{ width: "6em" }}
                   onClick={handleOpen}
                 >
-                  Edit
                 </Button>
                 <Modal open={open} style={{zIndex: 1600}} onClose={handleClose}>
                   <Box style={style} component="form" onSubmit={updatePost}>
@@ -138,7 +139,7 @@ function SinglePost(post) {
                 style={{ width: "6em" }}
                 onClick={() => deletePost(post)}
               >
-                Delete
+                <DeleteIcon></DeleteIcon>
               </Button>
             </div> : null}
           </div> 

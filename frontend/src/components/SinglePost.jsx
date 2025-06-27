@@ -97,6 +97,7 @@ function SinglePost(post) {
                   style={{ width: "6em" }}
                   onClick={handleOpen}
                 >
+                  <EditIcon />
                 </Button>
                 <Modal open={open} style={{zIndex: 1600}} onClose={handleClose}>
                   <Box style={style} component="form" onSubmit={updatePost}>
